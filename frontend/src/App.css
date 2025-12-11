@@ -1,42 +1,92 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/* Simple beginner-friendly CSS */
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #eef1f5;
 }
 
 .card {
-  padding: 2em;
+  width: 340px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
 }
 
-.read-the-docs {
-  color: #888;
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.btn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.active-btn {
+  flex: 1;
+  padding: 8px;
+  background: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.tab, .tab-active {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tab {
+  border: 1px solid lightgray;
+  background: white;
+}
+
+.tab-active {
+  background: #e6e6e6;
+  border: 1px solid gray;
+}
+
+/* Form Inputs */
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Submit Button */
+.main-btn {
+  width: 100%;
+  padding: 10px;
+  background: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Messages */
+.message {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
 }
