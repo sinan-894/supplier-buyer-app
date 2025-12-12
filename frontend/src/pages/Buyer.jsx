@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // BuyerUI.jsx
 // Minimal, unstyled React component (JavaScript) providing the UI structure
@@ -34,13 +35,19 @@ export default function Buyer({ initialListings = null }) {
       created_at: "2025-12-03T08:30:00Z",
     },
   ];
-
+  const navigateRoute = useNavigate()
   const [route, setRoute] = useState("view"); // 'view' | 'logout'
   const [listings] = useState(initialListings || demo);
 
   function navigate(to) {
     setRoute(to);
   }
+
+  function onLogoutConfirm(){
+    localStorage.removeItem("role");
+    navigateRoute("/login");
+  }
+
 
   function logout() {
     // UI-only: switch to logout route; real apps will call auth API
@@ -115,8 +122,10 @@ export default function Buyer({ initialListings = null }) {
 
       {route === "logout" && (
         <div>
-          <h2>You are logged out</h2>
-          <p>Implement real auth logout to end the session.</p>
+          <h2>Are you sure you want to logout?</h2>
+          <button  onClick={onLogoutConfirm}>
+            Confirm Logout
+          </button>
         </div>
       )}
     </div>

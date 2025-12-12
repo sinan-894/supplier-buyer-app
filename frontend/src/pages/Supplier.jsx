@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function Supplier() {
+
+  const navigateRoute = useNavigate() 
   const [route, setRoute] = useState("view"); // 'view' | 'create' | 'logout'
   const [listings, setListings] = useState([]);
   const [error, setError] = useState("");
@@ -16,6 +18,11 @@ export default function Supplier() {
     unit_price: "",
   };
   const [form, setForm] = useState(initialForm);
+
+  function onLogoutConfirm(){
+    localStorage.removeItem("role");
+    navigateRoute("/login");
+  }
 
   function navigate(to) {
     setError("");
@@ -256,9 +263,11 @@ export default function Supplier() {
 
       {route === "logout" && (
         <div>
-          <h2>You are logged out.</h2>
-          <p>Refresh the page to start a new session (or implement real auth as needed).</p>
-        </div>
+      <h2>Are you sure you want to logout?</h2>
+      <button  onClick={onLogoutConfirm}>
+        Confirm Logout
+      </button>
+    </div>
       )}
     </div>
   );
