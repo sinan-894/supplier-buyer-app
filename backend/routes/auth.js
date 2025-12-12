@@ -17,7 +17,7 @@ router.post("/signup", async (req, res) => {
     user = new User({ name, email, password: hashed, role });
     await user.save();
 
-    res.json({ msg: "Account created successfully!" });
+    res.json({ msg: "Account created successfully!",data:{email, role} });
   } catch (err) {
     res.status(500).json({ msg: "Server error" });
   }
@@ -26,21 +26,16 @@ router.post("/signup", async (req, res) => {
 // LOGIN API
 router.post("/login", async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ email, role });
-    if (!user) return res.status(400).json({ msg: "Invalid email or role" });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: "Invalid email" });
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ msg: "Invalid password" });
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email, role: user.role },
-      "SECRET_KEY",
-      { expiresIn: "2d" }
-    );
 
-    res.json({ msg: "Login successful", token });
+    res.json({ msg: "Login successful", data:{ email: user.email, role: user.role } });
   } catch (err) {
     res.status(500).json({ msg: "Server error" });
   }
