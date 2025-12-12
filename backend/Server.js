@@ -1,16 +1,24 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const app = express();
 
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const authRoutes = require("./routes/auth");
+
+const app = express();
 app.use(cors({ origin: ['http://localhost:5173','http://localhost:3000'], credentials: true }));
 app.use(express.json());
 
-// connect to mongodb
-const MONGO = process.env.MONGO || 'mongodb://127.0.0.1:27017/supplierBuyerDB';
-
-mongoose.connect("mongodb://127.0.0.1:27017/supplier_buyer")
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("MongoDB connection error:", err));
+// DB Connection
+mongoose
+  .connect("mongodb://127.0.0.1:27017/authdb")
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 app.listen(5000, () => console.log("Server running on port 5000"));
+
+// mount routes
+app.use('/api/listings', require('./routes/listings'));
+app.use("/api/auth", authRoutes);
+
+
+
