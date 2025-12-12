@@ -1,15 +1,7 @@
-// src/components/Supplier.jsx
-import React, { useEffect, useState } from "react";
-
-const API = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
-
-function authHeaders() {
-  const token = localStorage.getItem("token");
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
+import React, { useState } from "react";
 
 export default function Supplier() {
-  const [route, setRoute] = useState("view"); // view | create
+  const [route, setRoute] = useState("view"); // 'view' | 'create' | 'logout'
   const [listings, setListings] = useState([]);
   const [error, setError] = useState("");
   const [editingId, setEditingId] = useState(null);
@@ -25,8 +17,6 @@ export default function Supplier() {
     unit_price: ""
   };
   const [form, setForm] = useState(initialForm);
-
-  useEffect(() => { loadMine(); }, []);
 
   async function loadMine() {
     setError("");
@@ -179,6 +169,13 @@ export default function Supplier() {
               <button type="button" onClick={() => { setRoute('view'); setError(''); }} style={{ marginLeft: 8 }}>Cancel</button>
             </div>
           </form>
+        </div>
+      )}
+
+      {route === "logout" && (
+        <div>
+          <h2>You are logged out.</h2>
+          <p>Refresh the page to start a new session (or implement real auth as needed).</p>
         </div>
       )}
     </div>
